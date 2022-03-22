@@ -93,3 +93,28 @@ function _delete(id) {
     function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
     function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
 }
+
+
+export const cardsActions = (card) => (dispatch) => {
+    dispatch(sendToReducer(userConstants.CARDS_REQUEST,[]));
+
+    userService.addCard(card)
+        .then(
+            cards => dispatch(sendToReducer(userConstants.CARDS_SUCCESS,cards)),
+            error => dispatch(sendToReducer
+                (userConstants.CARDS_FAILURE,error.toString()))
+        );
+};
+const sendToReducer = (type,payload) => ({ type: type, payload:payload });
+
+
+export const getCardActions = (card) => (dispatch) => {
+    dispatch(sendToReducer(userConstants.GETCARDS_REQUEST,[]));
+
+    userService.getCard(card)
+        .then(
+            cards => dispatch(sendToReducer(userConstants.GETCARDS_SUCCESS,cards)),
+            error => dispatch(sendToReducer
+                (userConstants.GETCARDS_FAILURE,error.toString()))
+        );
+};
