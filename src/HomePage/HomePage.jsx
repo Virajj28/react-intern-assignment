@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { userActions } from '../_actions';
 
 class HomePage extends React.Component {
@@ -38,6 +37,7 @@ class HomePage extends React.Component {
                 }
                 <p>
                     <Link to="/login">Logout</Link>
+                    <Link to="/cards">Add Card</Link>
                 </p>
             </div>
         );

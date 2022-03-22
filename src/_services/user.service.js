@@ -8,7 +8,9 @@ export const userService = {
     getAll,
     getById,
     update,
-    delete: _delete
+    delete: _delete,
+    addCard,
+    getCard
 };
 
 function login(username, password) {
@@ -97,4 +99,23 @@ function handleResponse(response) {
 
         return data;
     });
+}
+
+function addCard(card) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(card)
+    };
+
+    return fetch(`${config.apiUrl}/cards`, requestOptions).then(handleResponse);
+}
+
+function getCard () {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/cards`, requestOptions).then(handleResponse);
 }
